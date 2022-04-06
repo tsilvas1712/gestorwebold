@@ -1,0 +1,21 @@
+COMO CORRIGIR BUG "Class 'Adldap\Laravel\AdldapServiceProvider' not found" APÓS ADD NOVA DEPENDENCIA VIA COMPOSER
+
+1) Abrir o arquivo vendor\composer\autoload_psr4.php
+
+Trocar a linha:
+	'Adldap\\' => array($vendorDir . '/adldap2/adldap2/src'),
+Por:
+	'Adldap\\Laravel\\' => array($vendorDir . '/adldap2/adldap2-laravel/src'),
+	'Adldap\\' => array($vendorDir . '/adldap2/adldap2/src'),    
+
+
+2) vendor\composer\autoload_static.php
+
+Trocar as linhas:
+        'Adldap\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/adldap2/adldap2/src',
+        ),
+Por:
+	'Adldap\\Laravel\\' => array($vendorDir . '/adldap2/adldap2-laravel/src'),
+	'Adldap\\' => array($vendorDir . '/adldap2/adldap2/src'),    

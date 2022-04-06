@@ -1,0 +1,118 @@
+.platform-display {
+    max-height: 75px;
+}
+
+.padding-bottom-20 {
+    padding-bottom: 20px !important;
+}
+
+.row.padding-top-20 {
+    padding-top: 20px !important;
+}
+
+.margin-bottom-5 {
+    margin-bottom: 5px !important;
+}
+
+#alert {
+    position: fixed;
+    top: 20px;
+    right: 100px;
+    width: 20%;
+}
+
+.btn-line {
+	padding: 0.4em;
+}
+
+.company-logo {
+	max-width: 72px;
+	max-height: 72px;
+}
+
+.company-logo-header {
+    box-shadow: 1px 1px 5px 0px rgba(10,0,0,.6);
+    height: 40px;
+    margin-top: 2px;
+    background: #FFF;
+    border-radius: 2px;
+}
+
+.company-logo-header-options {
+    background: #FFF;
+    height: 38px;
+    box-shadow: 1px 1px 5px 0px rgba(10,0,0,.6);
+    border-radius: 2px;
+    display: inline-block;
+    top: 0;
+    padding-top: 7px;
+}
+
+.head-space {
+    display: inline-block;
+    margin-left: 50px;
+}
+
+p.shorter {
+    line-height: 20px;
+}
+
+.widget-title-white a {
+    color: #FFF !important;
+}
+
+.wrap-table {
+    width: 100%;
+    overflow: auto;
+}
+
+.company-map {
+    height: 350px;
+}
+
+.loading {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(255,255,255,.6);
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+}
+
+.loading-wrapper {
+    left: 50%;
+    top: 50%;
+    position: fixed;
+    font-size: 40px;
+}
+
+.alert-close {
+    display: block !important;
+    float: right;
+    right: 0 !important;
+    position: relative !important;
+    font-size: 18px;
+    color: yellow;
+}
+
+.wizard-actions {
+    margin-bottom: 4em;
+}
+
+.login-layout {
+    background-size: cover;
+}
+
+.opaque {
+    left: 0;
+    right: 0;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(3,3,3,0.6);
+}

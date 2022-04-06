@@ -1,0 +1,1 @@
+<button id='sms-whats-send' class='btn btn-xs btn-success'><i class='ace-icon fa fa-paper-plane icon-only'></i> Enviar</button>

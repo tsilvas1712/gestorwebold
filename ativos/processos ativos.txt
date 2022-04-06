@@ -1,0 +1,28 @@
+jaqueline.barreto
+Ativos@51
+
+https://webservice.ativossa.com.br/rico-webservice/FaseService?wsdl
+	incluirFaseArquivo
+	listarFases
+	pesquisarFase
+	listarFasesAntigas
+	pesquisarTipoFase
+	incluirFase
+	pesquisarFaseArquivo
+##########################################################################
+https://webservice.ativossa.com.br/rico-webservice/OperacaoService?wsdl
+	pesquisarOperacaoPassivelAcordoSerasa
+	pesquisarOperacao
+	pesquisarOperacoes
+	pesquisarOperacaoPassivelAcordo
+##########################################################################
+https://webservice.ativossa.com.br/rico-webservice/BoletoService?wsdl
+	listarBoletos
+	gerarSegundaVia
+	pesquisarProximoBoleto	
+##########################################################################
+https://webservice.ativossa.com.br/rico-webservice/AcordoService?wsdl
+	alterarDataParcelas
+	pesquisarAcordos
+	pesquisarAcordo
+	alterarValorParcelas

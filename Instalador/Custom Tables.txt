@@ -1,0 +1,21 @@
+/****************************************
+	CUSTOM TABLES - LABOR MANAGER
+	Author: Jonas Schen
+	Date: 19/01/2016
+****************************************/
+CREATE TABLE `chamados_labor` (
+  `labor_id` int(11) NOT NULL AUTO_INCREMENT,
+  `ticket_id` int(11) DEFAULT NULL,
+  `staff_id` int(11) DEFAULT NULL,
+  `hours` float DEFAULT NULL,
+  `moment` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `activity` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`labor_id`)
+) ENGINE=InnoDB;
+
+====================================================
+
+ALTER TABLE `desenvolvimento`.`chamados_staff` 
+ADD COLUMN `ticket_actual` VARCHAR(20) NULL AFTER `updated`;
+
+====================================================

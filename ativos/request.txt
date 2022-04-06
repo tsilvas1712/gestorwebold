@@ -1,0 +1,275 @@
+procedure TDM.HTTPRIOAtivos(const MethodName: String;
+  var SOAPRequest: WideString);
+var
+  Header_OLD, Header_NEW: String;
+  old_block, new_block: String;
+  WSAtivosMCAUsuario, WSAtivosMCASenha: String;
+begin
+  if (MethodName = 'simularPropostaAcordo') then
+  begin
+    WSAtivosMCAUsuario := BuscaDadosGenericoParametro('ds_WSAtivosLogin');
+    WSAtivosMCASenha := BuscaDadosGenericoParametro('ds_WSAtivosSenha');
+
+    old_block := '<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">';
+    new_block := '<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://service.commons.rico.ativos.com.br/" xmlns:ns2="http://localhost/soap_server/server.php">'+
+                 '<SOAP-ENV:Header><ns2:AuthenticationInfo><username>'+ WSAtivosMCAUsuario +'</username><password>' + WSAtivosMCASenha + '</password></ns2:AuthenticationInfo></SOAP-ENV:Header>';
+                 //'<SOAP-ENV:Header><ns2:AuthenticationInfo><username>andre.rolim</username><password>@4UA11dade@</password></ns2:AuthenticationInfo></SOAP-ENV:Header>';
+    SOAPRequest := StringReplace(SOAPRequest, old_block, new_block, [rfReplaceAll]);
+
+    old_block := 'simularPropostaAcordo';
+    new_block := 'ns1:simularPropostaAcordo';
+    SOAPRequest := StringReplace(SOAPRequest, old_block, new_block, [rfReplaceAll]);
+
+    old_block := ' xmlns="http://service.commons.rico.ativos.com.br/"';
+    new_block := '';
+    SOAPRequest := StringReplace(SOAPRequest, old_block, new_block, [rfReplaceAll]);
+
+    old_block := ' xmlns=""';
+    new_block := '';
+    SOAPRequest := StringReplace(SOAPRequest, old_block, new_block, [rfReplaceAll]);
+  end else
+  begin
+    sleep(1);
+    
+    Header_OLD := '<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">';
+    Header_NEW := '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.commons.rico.ativos.com.br/"><soapenv:Header/>';
+    SOAPRequest := StringReplace(SOAPRequest, Header_OLD, Header_NEW, [rfReplaceAll]);
+
+    // OperacaoService
+    if (MethodName = 'pesquisarOperacao') then
+    begin
+      Header_OLD := '<pesquisarOperacao xmlns="http://service.commons.rico.ativos.com.br/">';
+      Header_NEW := '<ser:pesquisarOperacao>';
+      SOAPRequest := StringReplace(SOAPRequest, Header_OLD, Header_NEW, [rfReplaceAll]);
+
+      SOAPRequest := StringReplace(SOAPRequest, '/pesquisarOperacao', '/ser:pesquisarOperacao', [rfReplaceAll]);
+    end
+    else   if (MethodName = 'pesquisarOperacaoPassivelAcordo') then
+    begin
+      Header_OLD := '<pesquisarOperacaoPassivelAcordo xmlns="http://service.commons.rico.ativos.com.br/">';
+      Header_NEW := '<ser:pesquisarOperacaoPassivelAcordo>';
+      SOAPRequest := StringReplace(SOAPRequest, Header_OLD, Header_NEW, [rfReplaceAll]);
+
+      SOAPRequest := StringReplace(SOAPRequest, '/pesquisarOperacaoPassivelAcordo', '/ser:pesquisarOperacaoPassivelAcordo', [rfReplaceAll]);
+    end
+    else   if (MethodName = 'pesquisarOperacoes') then
+    begin
+      Header_OLD := '<pesquisarOperacoes xmlns="http://service.commons.rico.ativos.com.br/">';
+      Header_NEW := '<ser:pesquisarOperacoes>';
+      SOAPRequest := StringReplace(SOAPRequest, Header_OLD, Header_NEW, [rfReplaceAll]);
+
+      SOAPRequest := StringReplace(SOAPRequest, '/pesquisarOperacoes', '/ser:pesquisarOperacoes', [rfReplaceAll]);
+    end
+    else   if (MethodName = 'pesquisarOperacoesLegado') then
+    begin
+      Header_OLD := '<pesquisarOperacoesLegado xmlns="http://service.commons.rico.ativos.com.br/">';
+      Header_NEW := '<ser:pesquisarOperacoesLegado>';
+      SOAPRequest := StringReplace(SOAPRequest, Header_OLD, Header_NEW, [rfReplaceAll]);
+
+      SOAPRequest := StringReplace(SOAPRequest, '/pesquisarOperacoesLegado', '/ser:pesquisarOperacoesLegado', [rfReplaceAll]);
+    end
+    else
+    //BoletoService
+    if (MethodName = 'gerarSegundaVia') then
+    begin
+      Header_OLD := '<gerarSegundaVia xmlns="http://service.commons.rico.ativos.com.br/">';
+      Header_NEW := '<ser:gerarSegundaVia>';
+      SOAPRequest := StringReplace(SOAPRequest, Header_OLD, Header_NEW, [rfReplaceAll]);
+
+      SOAPRequest := StringReplace(SOAPRequest, '/gerarSegundaVia', '/ser:gerarSegundaVia', [rfReplaceAll]);
+    end
+    else if (MethodName = 'listarBoletos') then
+    begin
+      Header_OLD := '<listarBoletos xmlns="http://service.commons.rico.ativos.com.br/">';
+      Header_NEW := '<ser:listarBoletos>';
+      SOAPRequest := StringReplace(SOAPRequest, Header_OLD, Header_NEW, [rfReplaceAll]);
+
+      SOAPRequest := StringReplace(SOAPRequest, '/listarBoletos', '/ser:listarBoletos', [rfReplaceAll]);
+    end
+    else if (MethodName = 'pesquisarProximoBoleto') then
+    begin
+      Header_OLD := '<pesquisarProximoBoleto xmlns="http://service.commons.rico.ativos.com.br/">';
+      Header_NEW := '<ser:pesquisarProximoBoleto>';
+      SOAPRequest := StringReplace(SOAPRequest, Header_OLD, Header_NEW, [rfReplaceAll]);
+
+      SOAPRequest := StringReplace(SOAPRequest, '/pesquisarProximoBoleto', '/ser:pesquisarProximoBoleto', [rfReplaceAll]);
+    end
+    else
+    //PropostaAcordoService
+    if (MethodName = 'alterarPropostaAcordo') then
+    begin
+      Header_OLD := '<alterarPropostaAcordo xmlns="http://service.commons.rico.ativos.com.br/">';
+      Header_NEW := '<ser:alterarPropostaAcordo>';
+      SOAPRequest := StringReplace(SOAPRequest, Header_OLD, Header_NEW, [rfReplaceAll]);
+
+      SOAPRequest := StringReplace(SOAPRequest, '/alterarPropostaAcordo', '/ser:alterarPropostaAcordo', [rfReplaceAll]);
+    end
+    else if (MethodName = 'alterarPropostaAcordoRenegociacao') then
+    begin
+      Header_OLD := '<alterarPropostaAcordoRenegociacao xmlns="http://service.commons.rico.ativos.com.br/">';
+      Header_NEW := '<ser:alterarPropostaAcordoRenegociacao>';
+      SOAPRequest := StringReplace(SOAPRequest, Header_OLD, Header_NEW, [rfReplaceAll]);
+
+      SOAPRequest := StringReplace(SOAPRequest, '/alterarPropostaAcordoRenegociacao', '/ser:alterarPropostaAcordoRenegociacao', [rfReplaceAll]);
+    end
+    else if (MethodName = 'aprovarPropostaAcordo') then
+    begin
+      Header_OLD := '<aprovarPropostaAcordo xmlns="http://service.commons.rico.ativos.com.br/">';
+      Header_NEW := '<ser:aprovarPropostaAcordo>';
+      SOAPRequest := StringReplace(SOAPRequest, Header_OLD, Header_NEW, [rfReplaceAll]);
+
+      SOAPRequest := StringReplace(SOAPRequest, '/aprovarPropostaAcordo', '/ser:aprovarPropostaAcordo', [rfReplaceAll]);
+    end
+    else if (MethodName = 'consultarUltimaPropostaAcordo') then
+    begin
+      Header_OLD := '<consultarUltimaPropostaAcordo xmlns="http://service.commons.rico.ativos.com.br/">';
+      Header_NEW := '<ser:consultarUltimaPropostaAcordo>';
+      SOAPRequest := StringReplace(SOAPRequest, Header_OLD, Header_NEW, [rfReplaceAll]);
+
+      SOAPRequest := StringReplace(SOAPRequest, '/consultarUltimaPropostaAcordo', '/ser:consultarUltimaPropostaAcordo', [rfReplaceAll]);
+    end
+    else if (MethodName = 'pesquisarPropostaAcordo') then
+    begin
+      Header_OLD := '<pesquisarPropostaAcordo xmlns="http://service.commons.rico.ativos.com.br/">';
+      Header_NEW := '<ser:pesquisarPropostaAcordo>';
+      SOAPRequest := StringReplace(SOAPRequest, Header_OLD, Header_NEW, [rfReplaceAll]);
+
+      SOAPRequest := StringReplace(SOAPRequest, '/pesquisarPropostaAcordo', '/ser:pesquisarPropostaAcordo', [rfReplaceAll]);
+    end
+    else if (MethodName = 'simularPropostaAcordo') then
+    begin
+      //Header_OLD := '<simularPropostaAcordo xmlns="http://service.commons.rico.ativos.com.br/">';
+      //Header_NEW := '<ser:simularPropostaAcordo>';
+      Header_OLD := 'simularPropostaAcordo';
+      Header_NEW := 'ns1:simularPropostaAcordo';
+      SOAPRequest := StringReplace(SOAPRequest, Header_OLD, Header_NEW, [rfReplaceAll]);
+
+      //SOAPRequest := StringReplace(SOAPRequest, '/simularPropostaAcordo', '/ser:simularPropostaAcordo', [rfReplaceAll]);
+    end
+    else if (MethodName = 'simularPropostaAcordoRenegociacao') then
+    begin
+      Header_OLD := '<simularPropostaAcordoRenegociacao xmlns="http://service.commons.rico.ativos.com.br/">';
+      Header_NEW := '<ser:simularPropostaAcordoRenegociacao>';
+      SOAPRequest := StringReplace(SOAPRequest, Header_OLD, Header_NEW, [rfReplaceAll]);
+
+      SOAPRequest := StringReplace(SOAPRequest, '/simularPropostaAcordoRenegociacao', '/ser:simularPropostaAcordoRenegociacao', [rfReplaceAll]);
+    end
+    else     // acordo
+    if (MethodName = 'pesquisarAcordos') then
+    begin
+      Header_OLD := '<pesquisarAcordos xmlns="http://service.commons.rico.ativos.com.br/">';
+      Header_NEW := '<ser:pesquisarAcordos>';
+      SOAPRequest := StringReplace(SOAPRequest, Header_OLD, Header_NEW, [rfReplaceAll]);
+
+      SOAPRequest := StringReplace(SOAPRequest, '/pesquisarAcordos', '/ser:pesquisarAcordos', [rfReplaceAll]);
+    end
+    else
+    if (MethodName = 'pesquisarAcordo') then
+    begin
+      Header_OLD := '<pesquisarAcordo xmlns="http://service.commons.rico.ativos.com.br/">';
+      Header_NEW := '<ser:pesquisarAcordo>';
+      SOAPRequest := StringReplace(SOAPRequest, Header_OLD, Header_NEW, [rfReplaceAll]);
+
+      SOAPRequest := StringReplace(SOAPRequest, '/pesquisarAcordo', '/ser:pesquisarAcordo', [rfReplaceAll]);
+    end
+    else
+    //FaseService
+    if (MethodName = 'incluirFase') then
+    begin
+      Header_OLD := '<incluirFase xmlns="http://service.commons.rico.ativos.com.br/">';
+      Header_NEW := '<ser:incluirFase>';
+      SOAPRequest := StringReplace(SOAPRequest, Header_OLD, Header_NEW, [rfReplaceAll]);
+
+      SOAPRequest := StringReplace(SOAPRequest, '/incluirFase', '/ser:incluirFase', [rfReplaceAll]);
+    end
+    else if (MethodName = 'incluirFaseArquivo') then
+    begin
+      Header_OLD := '<incluirFaseArquivo xmlns="http://service.commons.rico.ativos.com.br/">';
+      Header_NEW := '<ser:incluirFaseArquivo>';
+      SOAPRequest := StringReplace(SOAPRequest, Header_OLD, Header_NEW, [rfReplaceAll]);
+
+      SOAPRequest := StringReplace(SOAPRequest, '/incluirFaseArquivo', '/ser:incluirFaseArquivo', [rfReplaceAll]);
+    end
+    else if (MethodName = 'listarFases') then
+    begin
+      Header_OLD := '<listarFases xmlns="http://service.commons.rico.ativos.com.br/">';
+      Header_NEW := '<ser:listarFases>';
+      SOAPRequest := StringReplace(SOAPRequest, Header_OLD, Header_NEW, [rfReplaceAll]);
+
+      SOAPRequest := StringReplace(SOAPRequest, '/listarFases', '/ser:listarFases', [rfReplaceAll]);
+    end
+    else if (MethodName = 'listarFasesAntigas') then
+    begin
+      Header_OLD := '<listarFasesAntigas xmlns="http://service.commons.rico.ativos.com.br/">';
+      Header_NEW := '<ser:listarFasesAntigas>';
+      SOAPRequest := StringReplace(SOAPRequest, Header_OLD, Header_NEW, [rfReplaceAll]);
+
+      SOAPRequest := StringReplace(SOAPRequest, '/listarFasesAntigas', '/ser:listarFasesAntigas', [rfReplaceAll]);
+    end
+    else if (MethodName = 'pesquisarFase') then
+    begin
+      Header_OLD := '<pesquisarFase xmlns="http://service.commons.rico.ativos.com.br/">';
+      Header_NEW := '<ser:pesquisarFase>';
+      SOAPRequest := StringReplace(SOAPRequest, Header_OLD, Header_NEW, [rfReplaceAll]);
+
+      SOAPRequest := StringReplace(SOAPRequest, '/pesquisarFase', '/ser:pesquisarFase', [rfReplaceAll]);
+    end
+    else if (MethodName = 'pesquisarFaseArquivo') then
+    begin
+      Header_OLD := '<pesquisarFaseArquivo xmlns="http://service.commons.rico.ativos.com.br/">';
+      Header_NEW := '<ser:pesquisarFaseArquivo>';
+      SOAPRequest := StringReplace(SOAPRequest, Header_OLD, Header_NEW, [rfReplaceAll]);
+
+      SOAPRequest := StringReplace(SOAPRequest, '/pesquisarFaseArquivo', '/ser:pesquisarFaseArquivo', [rfReplaceAll]);
+    end
+    else if (MethodName = 'pesquisarTipoFase') then
+    begin
+      Header_OLD := '<pesquisarTipoFase xmlns="http://service.commons.rico.ativos.com.br/">';
+      Header_NEW := '<ser:pesquisarTipoFase>';
+      SOAPRequest := StringReplace(SOAPRequest, Header_OLD, Header_NEW, [rfReplaceAll]);
+
+      SOAPRequest := StringReplace(SOAPRequest, '/pesquisarTipoFase', '/ser:pesquisarTipoFase', [rfReplaceAll]);
+    end;
+
+    SOAPRequest := StringReplace(SOAPRequest, 'SOAP-ENV', 'soapenv', [rfReplaceAll]);
+    SOAPRequest := StringReplace(SOAPRequest, '&lt;', '<', [rfReplaceAll]);
+    SOAPRequest := StringReplace(SOAPRequest, '&gt;', '>', [rfReplaceAll]);
+    SOAPRequest := StringReplace(SOAPRequest, ' >', '>', [rfReplaceAll]);
+  end;
+end;
+
+
+<?xml version="1.0"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.commons.rico.ativos.com.br/"><soapenv:Header/><soapenv:Body><ser:listarFases><ndg>0000000928254653</ndg></ser:listarFases></soapenv:Body></soapenv:Envelope>
+
+
+<?php
+
+$client = new http\Client;
+$request = new http\Client\Request;
+
+$body = new http\Message\Body;
+$body->append('<?xml version="1.0"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.commons.rico.ativos.com.br/"><soapenv:Header/><soapenv:Body><ser:listarFases><ndg>0000000928254653</ndg></ser:listarFases></soapenv:Body></soapenv:Envelope>');
+
+$request->setRequestUrl('https://webservice.ativossa.com.br/rico-webservice/FaseService');
+$request->setRequestMethod('POST');
+$request->setBody($body);
+
+$request->setQuery(new http\QueryString([
+  'wsdl' => ''
+]));
+
+$request->setHeaders([
+  'content-type' => 'application/xml',
+  'authorization' => 'Basic amFxdWVsaW5lLmJhcnJldG86QXRpdm9zQDY2'
+]);
+
+$client->enqueue($request)->send();
+$response = $client->getResponse();
+
+echo $response->getBody();
+
+
+
+
